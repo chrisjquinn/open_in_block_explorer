@@ -1,3 +1,5 @@
+# Created by CQ
+
 import re
 import sys
 import webbrowser
@@ -16,43 +18,43 @@ ASSET_REGEX = {
 	'BNB': r'\bbnb1[a-hj-np-z0-9]{38}\b',
 	'XLM': r'\b[G][A-Z0-9]{55}\b',
 	'ZEN': r'\bzn[a-km-zA-HJ-NP-Z1-9]{24,33}\b',
-	# 'XTZ': r'',
-	'NEAR': r'^(([a-z\d]+[\-_])*[a-z\d]+\.)*([a-z\d]+[\-_])*[a-z\d]+$', #From near foundation & converted, not the best
-	# 'CRO': r'',
+	'XTZ': r'\bKT1[1-9A-HJ-NP-Za-km-z]{33}\b|\btz[1,2,3][1-9A-HJ-NP-Za-km-z]{33}\b', #Guessed by yours truly
+	'CRO': r'^\b(cro|crocncl|crocnclcons)[a-zA-HJ-NP-Z0-9]{39}\b',
 	# 'ADA': r'',
 	'DOGE': r'\bD{1}[5-9A-HJ-NP-U]{1}[1-9A-HJ-NP-Za-km-z]{32}\b',
-	# 'SOL': r''
-	# 'NEO': r'\bA[0-9a-zA-Z]{33}\b',
+	'SOL': r'\b[1-9A-HJ-NP-Za-km-z]{32,44}\b',
+	'NEAR': r'^(([a-z\d]+[\-_])*[a-z\d]+\.)*([a-z\d]+[\-_])*[a-z\d]+$' #From near foundation & converted, not the best so put at the bottom
 }
-
 
 ADDRESS_URL = {
-	'blockchair': {'BTC': 'https://blockchair.com/bitcoin/address/', 'BCH': 'https://blockchair.com/bitcoin-cash/address/'},
-	'blockchain.info': {'BTC', 'https://www.blockchain.com/btc/address/'},
+	'blockchair': {'BTC': 'https://blockchair.com/bitcoin/address', 'BCH': 'https://blockchair.com/bitcoin-cash/address/'},
 	'etherscan': {'ETH': 'https://etherscan.io/address/'},
 	'tzkt.io': {'XTZ': 'https://tzkt.io/'},
-	'explorer.near.org': {'NEAR':'https://wallet.near.org/profile/'}
-}
+	'explorer.near.org': {'NEAR':'https://wallet.near.org/profile/'},
+	'mintscan': {'BNB':'https://binance.mintscan.io/account/'},
+	'crypto.com': {'CRO':'https://crypto.org/explorer/account/'}
 
+}
 # List of assets to cover: 
 # BTC, ETH, LTC, BCH, ZEC, 
 PREFERENCES = {
 	'BTC': 'blockchair',
 	'LTC': 'blockchair',
-	'BCH': 'blockchain.info',
+	'BCH': 'blockchair',
 	'ZEC': 'blockchair',
 	'ETH': 'etherscan',
 	'DASH': 'blockchair',
 	'XMR': '',
 	'XRP': '',
 	'ZIL': '',
-	'BNB': '',
+	'BNB': 'mintscan',
 	'XLM': '',
 	'ZEN': '',
 	'XTZ': 'tzkt.io',
 	'NEAR': 'explorer.near.org',
+	'CRO': 'crypto.com',
 	'ADA': '',
-	'DOGE': '',
+	'DOGE': 'blockchair',
 	'SOL': ''
 }
 
@@ -63,8 +65,6 @@ def asset_from_address(address) -> str or None:
 			return asset
 	return None
 
-
-# Main loop
 for line in sys.stdin:
 
 	addr = str(line.rstrip())
@@ -87,9 +87,5 @@ for line in sys.stdin:
 
 	if 'q' == line.rstrip():
 		break
-
-
-
-
 
 
