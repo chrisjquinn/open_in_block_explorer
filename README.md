@@ -1,6 +1,6 @@
 # open_in_block_explorer
 
-> Fed up of having to open 3 tabs of etherscan, data.elliptic (etc.) for your crypto addresses? This code will determine the type of coin and go create a tab for that address.
+> Fed up of having to open 3 tabs of etherscan, blockchain.info (etc.) for your crypto addresses? This code will determine the type of coin and go create a tab for that address.
 
 
 ## Pros
